@@ -14,4 +14,4 @@ This repository is used internally for testing and reviewing purposes only.
 
 - This is a test project for Lumen Reviewer evaluation.
 - Do not use this in a production environment.
-- Only for testing.
+- Only for testing lumen.
