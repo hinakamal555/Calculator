@@ -1,4 +1,4 @@
-export type Operator = "+" | "-" | "*" | "/";
+export type Operator = "+" | "-" | "*" | "/" | "%";
 
 function parseNumber(value: number, inputName: string): number {
   if (!Number.isFinite(value)) {
@@ -68,6 +68,23 @@ export function divide(a: number, b: number): number {
 }
 
 /**
+ * Returns the remainder after dividing the first validated number by the second.
+ * @param a The dividend.
+ * @param b The divisor.
+ * @throws {TypeError} When any input is not a finite number.
+ * @throws {Error} When the second input is zero.
+ */
+export function modulo(a: number, b: number): number {
+  const [left, right] = validateInputs(a, b);
+
+  if (right === 0) {
+    throw new Error("Modulo by zero is not allowed.");
+  }
+
+  return left % right;
+}
+
+/**
  * Calculates a result for a supported arithmetic operator.
  * @param a The first numeric operand.
  * @param operator The arithmetic operator to apply.
@@ -83,6 +100,8 @@ export function calculate(a: number, operator: Operator, b: number): number {
       return multiply(a, b);
     case "/":
       return divide(a, b);
+    case "%":
+      return modulo(a, b);
   }
 
   const exhaustiveCheck: never = operator;
