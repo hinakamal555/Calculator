@@ -10,7 +10,10 @@ This project serves as a simple calculator application used as a test subject to
 
 This repository is used internally for testing and reviewing purposes only.
 
+Supported operators in `calculate(a, operator, b)`:
+- `+`, `-`, `*`, `/`, `%`
+
 ## Notes
 
 - This is a test project for Lumen Reviewer evaluation.
-- Do not use this in a production environment.
+- Do not use this in a production environment...
