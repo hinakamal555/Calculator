@@ -16,6 +16,7 @@ Supported operations:
 - Multiplication (`*`)
 - Division (`/`)
 - Modulo (`%`)
+- Exponentiation (`**`)
 
 ## Notes
 

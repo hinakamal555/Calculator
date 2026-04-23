@@ -1,4 +1,4 @@
-export type Operator = "+" | "-" | "*" | "/" | "%";
+export type Operator = "+" | "-" | "*" | "/" | "%" | "**";
 
 function parseNumber(value: number, inputName: string): number {
   if (!Number.isFinite(value)) {
@@ -85,6 +85,26 @@ export function modulo(a: number, b: number): number {
 }
 
 /**
+ * Raises the first validated number to the power of the second.
+ * @param base The base value.
+ * @param exponent The exponent to raise the base to.
+ * @throws {TypeError} When any input is not a finite number.
+ * @throws {RangeError} When the result is not a finite number (e.g. overflow or 0 ** negative).
+ */
+export function power(base: number, exponent: number): number {
+  const [left, right] = validateInputs(base, exponent);
+
+  const result = left ** right;
+  if (!Number.isFinite(result)) {
+    throw new RangeError(
+      "Power operation produced a non-finite result (overflow or undefined).",
+    );
+  }
+
+  return result;
+}
+
+/**
  * Calculates a result for a supported arithmetic operator.
  * @param a The first numeric operand.
  * @param operator The arithmetic operator to apply.
@@ -102,6 +122,8 @@ export function calculate(a: number, operator: Operator, b: number): number {
       return divide(a, b);
     case "%":
       return modulo(a, b);
+    case "**":
+      return power(a, b);
   }
 
   const exhaustiveCheck: never = operator;
