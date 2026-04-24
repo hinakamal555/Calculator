@@ -125,7 +125,4 @@ export function calculate(a: number, operator: Operator, b: number): number {
     case "**":
       return power(a, b);
   }
-
-  const exhaustiveCheck: never = operator;
-  throw new Error(`Unsupported operator: ${String(exhaustiveCheck)}`);
 }
