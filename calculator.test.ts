@@ -7,7 +7,7 @@ import {
   multiply,
   power,
   subtract,
-} from "./calculator.js";
+} from "./src/calculator.js";
 
 describe("add", () => {
   it("sums finite numbers", () => {

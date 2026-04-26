@@ -1,4 +1,5 @@
 {
+  "exclude": ["node_modules", "dist"],
   "compilerOptions": {
     "target": "ES2022",
     "module": "NodeNext",
@@ -7,5 +8,5 @@
     "noEmit": true,
     "skipLibCheck": true
   },
-  "include": ["*.ts"]
+  "include": ["**/*.ts"]
 }
