@@ -109,6 +109,7 @@ export function power(base: number, exponent: number): number {
  * @param a The first numeric operand.
  * @param operator The arithmetic operator to apply.
  * @param b The second numeric operand.
+ * @throws {TypeError|Error|RangeError} Same as the underlying operation.
  */
 export function calculate(a: number, operator: Operator, b: number): number {
   switch (operator) {
@@ -124,5 +125,9 @@ export function calculate(a: number, operator: Operator, b: number): number {
       return modulo(a, b);
     case "**":
       return power(a, b);
+    default: {
+      const _exhaustive: never = operator;
+      return _exhaustive;
+    }
   }
 }
