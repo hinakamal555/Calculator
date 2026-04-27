@@ -1,3 +1,5 @@
+import type { HistoryManager } from "./history.js";
+
 export type Operator = "+" | "-" | "*" | "/" | "%" | "**";
 
 function parseNumber(value: number, inputName: string): number {
@@ -61,7 +63,7 @@ export function divide(a: number, b: number): number {
   const [left, right] = validateInputs(a, b);
 
   if (right === 0) {
-    throw new Error("Division by zero is not allowed.");
+    throw new Error("Division by zero is not allowed");
   }
 
   return left / right;
@@ -109,20 +111,39 @@ export function power(base: number, exponent: number): number {
  * @param a The first numeric operand.
  * @param operator The arithmetic operator to apply.
  * @param b The second numeric operand.
+ * @throws {TypeError|Error|RangeError} Same as the underlying operation.
  */
-export function calculate(a: number, operator: Operator, b: number): number {
+export function calculate(
+  a: number,
+  operator: Operator,
+  b: number,
+  history?: HistoryManager,
+): number {
+  let result: number;
   switch (operator) {
     case "+":
-      return add(a, b);
+      result = add(a, b);
+      break;
     case "-":
-      return subtract(a, b);
+      result = subtract(a, b);
+      break;
     case "*":
-      return multiply(a, b);
+      result = multiply(a, b);
+      break;
     case "/":
-      return divide(a, b);
+      result = divide(a, b);
+      break;
     case "%":
-      return modulo(a, b);
+      result = modulo(a, b);
+      break;
     case "**":
-      return power(a, b);
+      result = power(a, b);
+      break;
+    default: {
+      const _exhaustive: never = operator;
+      return _exhaustive;
+    }
   }
+  history?.add({ expression: `${a} ${operator} ${b} = ${result}`, result });
+  return result;
 }
