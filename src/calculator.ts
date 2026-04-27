@@ -1,6 +1,4 @@
-import { HistoryManager } from "./history.js";
-
-export const historyManager = new HistoryManager();
+import type { HistoryManager } from "./history.js";
 
 export type Operator = "+" | "-" | "*" | "/" | "%" | "**";
 
@@ -115,7 +113,12 @@ export function power(base: number, exponent: number): number {
  * @param b The second numeric operand.
  * @throws {TypeError|Error|RangeError} Same as the underlying operation.
  */
-export function calculate(a: number, operator: Operator, b: number): number {
+export function calculate(
+  a: number,
+  operator: Operator,
+  b: number,
+  history?: HistoryManager,
+): number {
   let result: number;
   switch (operator) {
     case "+":
@@ -141,6 +144,6 @@ export function calculate(a: number, operator: Operator, b: number): number {
       return _exhaustive;
     }
   }
-  historyManager.add({ expression: `${a} ${operator} ${b}`, result });
+  history?.add({ expression: `${a} ${operator} ${b} = ${result}`, result });
   return result;
 }

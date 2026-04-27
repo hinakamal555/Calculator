@@ -15,9 +15,14 @@ export class HistoryManager {
     }
   }
 
-  undo(): HistoryEntry | null {
-    const last = this.entries.pop();
-    return last ?? null;
+  undo(): { undoneEntry: HistoryEntry; newState: HistoryEntry | null } | null {
+    const undoneEntry = this.entries.pop();
+    if (!undoneEntry) {
+      return null;
+    }
+
+    const latestEntry = this.entries.at(-1) ?? null;
+    return { undoneEntry, newState: latestEntry };
   }
 
   clear(): void {

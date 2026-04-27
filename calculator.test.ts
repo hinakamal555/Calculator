@@ -8,6 +8,7 @@ import {
   power,
   subtract,
 } from "./src/calculator.js";
+import { HistoryManager } from "./src/history.js";
 
 describe("add", () => {
   it("sums finite numbers", () => {
@@ -76,5 +77,32 @@ describe("calculate", () => {
 
   it("propagates validation from underlying ops", () => {
     expect(() => calculate(1, "/", 0)).toThrow("Division by zero");
+  });
+
+  it("stores formatted calculation history when manager is provided", () => {
+    const history = new HistoryManager();
+
+    expect(calculate(2, "+", 3, history)).toBe(5);
+    expect(history.getAll()).toEqual([{ expression: "2 + 3 = 5", result: 5 }]);
+  });
+});
+
+describe("history manager", () => {
+  it("undo returns removed entry and the new top state", () => {
+    const history = new HistoryManager();
+    history.add({ expression: "2 + 3 = 5", result: 5 });
+    history.add({ expression: "5 * 2 = 10", result: 10 });
+
+    expect(history.undo()).toEqual({
+      undoneEntry: { expression: "5 * 2 = 10", result: 10 },
+      newState: { expression: "2 + 3 = 5", result: 5 },
+    });
+    expect(history.getAll()).toEqual([{ expression: "2 + 3 = 5", result: 5 }]);
+  });
+
+  it("returns null when undo is called on empty history", () => {
+    const history = new HistoryManager();
+
+    expect(history.undo()).toBeNull();
   });
 });

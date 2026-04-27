@@ -1,6 +1,8 @@
-import { calculate, historyManager, type Operator } from "./calculator.js";
+import { calculate, type Operator } from "./calculator.js";
+import { HistoryManager } from "./history.js";
 
 const OPERATORS = new Set<string>(["+", "-", "*", "/", "%", "**"]);
+const historyManager = new HistoryManager();
 
 function main(): void {
   const [cmd, ...args] = process.argv.slice(2);
@@ -27,7 +29,7 @@ function main(): void {
       process.exitCode = 1;
       return;
     }
-    console.log(calculate(a, op, b));
+    console.log(calculate(a, op, b, historyManager));
     return;
   }
   console.error(
