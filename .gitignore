@@ -1,0 +1,45 @@
+# Dependencies
+node_modules/
+
+# Build output
+dist/
+build/
+out/
+*.tsbuildinfo
+
+# Logs and debug
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+lerna-debug.log*
+
+# Caches
+.cache/
+.parcel-cache/
+.turbo/
+*.tmp
+*.temp
+
+# Environment and secrets
+.env
+.env.*
+!.env.example
+
+# Test / coverage
+coverage/
+.nyc_output/
+.vitest/
+
+# OS
+.DS_Store
+Thumbs.db
+ehthumbs.db
+Desktop.ini
+
+# Editor / IDE
+.idea/
+*.swp
+*.swo
+*~
