@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Calculator</title>
+    <link rel="stylesheet" href="./src/styles.css" />
+  </head>
+  <body>
+    <h1>Calculator</h1>
+    <div class="app">
+      <div class="calculator">
+        <div id="display" class="display" aria-live="polite">0</div>
+        <div class="keys" role="group" aria-label="Calculator keypad">
+          <button type="button" class="key-clear" data-action="clear">C</button>
+          <button type="button" class="key-op" data-action="op-/">÷</button>
+          <button type="button" class="key-op" data-action="op-*">×</button>
+          <button type="button" class="key-op" data-action="op--">−</button>
+          <button type="button" data-action="digit-7">7</button>
+          <button type="button" data-action="digit-8">8</button>
+          <button type="button" data-action="digit-9">9</button>
+          <button type="button" class="key-op key-plus" data-action="op-+">+</button>
+          <button type="button" data-action="digit-4">4</button>
+          <button type="button" data-action="digit-5">5</button>
+          <button type="button" data-action="digit-6">6</button>
+          <button type="button" data-action="digit-1">1</button>
+          <button type="button" data-action="digit-2">2</button>
+          <button type="button" data-action="digit-3">3</button>
+          <button type="button" data-action="digit-0">0</button>
+          <button type="button" data-action="decimal">.</button>
+          <button type="button" class="key-eq" data-action="equals">=</button>
+        </div>
+      </div>
+
+      <section class="history-section" aria-labelledby="history-heading">
+        <h2 id="history-heading">Calculation history</h2>
+        <div class="history-actions">
+          <button type="button" id="undo-btn" disabled>Undo</button>
+          <button type="button" id="clear-history-btn">Clear history</button>
+        </div>
+        <ul id="history-list" aria-label="Past calculations"></ul>
+      </section>
+    </div>
+
+    <script type="module" src="./dist/main.js"></script>
+  </body>
+</html>
